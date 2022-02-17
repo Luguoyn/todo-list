@@ -4,9 +4,17 @@
       <input type="checkbox"
              :checked="item.done"
              @change="handleCheck(item.id)"/>
-      <span>{{ item.title }}</span>
+      <span v-show="!item.isEdit">{{ item.title }}</span>
+      <input v-show="item.isEdit"
+             type="text"
+             :value="item.title"
+             @blur="handleBlur(item, $event)"
+             @keyup.enter="handleBlur(item, $event)"
+             ref="inputTitle"
+      >
     </label>
     <button class="btn btn-danger" @click="handleDelete(item.id)">删除</button>
+    <button class="btn btn-edit" @click="handleEdit(item)">编辑</button>
   </li>
 </template>
 
@@ -26,6 +34,25 @@ export default {
         this.$bus.$emit('deleteItem', id);
       }
     },
+    //编辑
+    handleEdit(item) {
+      // eslint-disable-next-line no-prototype-builtins
+      if (item.hasOwnProperty('isEdit')) {
+        item.isEdit = true;
+      } else {
+        this.$set(item, 'isEdit', true);
+      }
+      this.$nextTick(function (){
+        this.$refs.inputTitle.focus();
+      });
+    },
+    //失去焦点回调(真正执行修改逻辑
+    handleBlur(item, e) {
+      item.isEdit = false;
+      const title = e.target.value.trim();
+      if(!title) return alert("输入不能为空!");
+      this.$bus.$emit('updateItem', item.id, title);
+    }
   }
 }
 </script>

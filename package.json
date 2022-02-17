@@ -10,6 +10,7 @@
   "dependencies": {
     "core-js": "^3.6.5",
     "nanoid": "^3.3.0",
+    "pubsub-js": "^1.9.4",
     "vue": "^2.6.11"
   },
   "devDependencies": {

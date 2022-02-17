@@ -4,7 +4,7 @@
       <div class="todo-wrap">
         <todo-header
             @addItem="addItem"/>
-        <todo-list :todos="todos" />
+        <todo-list :todos="todos"/>
         <todo-footer
             :todos="todos"
             @checkAllItems="checkAllItems"
@@ -61,13 +61,21 @@ export default {
       }
     }
   },
-  mounted(){
+  mounted() {
     this.$bus.$on('checkItem', this.checkItem);
     this.$bus.$on('deleteItem', this.deleteItem);
+
+    this.$bus.$on('updateItem', (id, title) => {
+      this.todos.forEach((item) => {
+        if (item.id === id) item.title = title;
+      })
+    })
   },
   beforeDestroy() {
     this.$bus.$off('checkItem');
     this.$bus.$off('deleteItem');
+
+    this.$bus.$off('updateItem');
   }
 }
 </script>
@@ -100,6 +108,18 @@ body {
 .btn-danger:hover {
   color: #fff;
   background-color: #bd362f;
+}
+
+.btn-edit {
+  color: #fff;
+  background-color: skyblue;
+  border: 1px solid rgb(103, 159, 180);
+  margin-right: 5px;
+}
+
+.btn-edit:hover {
+  color: #fff;
+  background-color: rgb(103, 159, 180);
 }
 
 .btn:focus {
