@@ -24,10 +24,10 @@ export default {
 <style scoped>
 /*main*/
 .todo-main {
-  margin-left: 0px;
+  margin-left: 0;
   border: 1px solid #ddd;
   border-radius: 2px;
-  padding: 0px;
+  padding: 0;
 }
 
 .todo-empty {
