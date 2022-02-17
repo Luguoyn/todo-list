@@ -1,13 +1,20 @@
 <template>
-  <ul class="todo-main">
-    <todo-item v-for="item in todos"
-               :key="item.id"
-               :item="item"
-    />
-  </ul>
+  <transition appear
+              enter-active-class="animate__bounceIn"
+              leave-active-class="animate__bounceOut"
+  >
+    <ul class="todo-main">
+        <todo-item v-for="item in todos"
+                   :key="item.id"
+                   :item="item"
+        />
+    </ul>
+  </transition>
+
 </template>
 
 <script>
+import 'animate.css'
 import TodoItem from "@/components/TodoItem";
 
 export default {

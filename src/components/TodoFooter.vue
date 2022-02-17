@@ -1,17 +1,23 @@
 <template>
-  <div class="todo-footer" v-show="total">
-    <label>
-      <input type="checkbox" v-model="isAll"/>
-    </label>
-    <span>
+  <transition appear
+              enter-active-class="animate__bounceIn"
+              leave-active-class="animate__bounceOut"
+  >
+    <div class="todo-footer" v-show="total">
+      <label>
+        <input type="checkbox" v-model="isAll"/>
+      </label>
+      <span>
           <span>已完成{{ doneTotal }}</span> / 全部{{ total }}
         </span>
-    <button class="btn btn-danger" @click="deleteAllDone">清除已完成任务</button>
-  </div>
-
+      <button class="btn btn-danger" @click="deleteAllDone">清除已完成任务</button>
+    </div>
+  </transition>
 </template>
 
 <script>
+import 'animate.css'
+
 export default {
   name: "TodoFooter",
   props: ['todos'],

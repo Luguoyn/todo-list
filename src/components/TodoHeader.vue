@@ -1,13 +1,20 @@
 <template>
+  <transition appear
+              enter-active-class="animate__bounceIn"
+              leave-active-class="animate__bounceOut"
+  >
   <div class="todo-header">
     <input type="text"
            placeholder="请输入你的任务名称，按回车键确认"
            v-model.trim="title"
            @keyup.enter="add"/>
   </div>
+  </transition>
 </template>
 
 <script>
+import 'animate.css'
+
 export default {
   name: "TodoHeader",
   data() {

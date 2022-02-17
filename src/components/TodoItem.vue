@@ -1,24 +1,34 @@
 <template>
-  <li>
-    <label>
-      <input type="checkbox"
-             :checked="item.done"
-             @change="handleCheck(item.id)"/>
-      <span v-show="!item.isEdit">{{ item.title }}</span>
-      <input v-show="item.isEdit"
-             type="text"
-             :value="item.title"
-             @blur="handleBlur(item, $event)"
-             @keyup.enter="handleBlur(item, $event)"
-             ref="inputTitle"
-      >
-    </label>
-    <button class="btn btn-danger" @click="handleDelete(item.id)">删除</button>
-    <button class="btn btn-edit" @click="handleEdit(item)">编辑</button>
-  </li>
+  <transition appear
+              enter-active-class="animate__bounceIn"
+              leave-active-class="animate__bounceOut"
+  >
+    <li>
+      <label>
+        <input type="checkbox"
+               :checked="item.done"
+               @change="handleCheck(item.id)"/>
+        <span v-show="!item.isEdit">{{ item.title }}</span>
+        <input v-show="item.isEdit"
+               type="text"
+               :value="item.title"
+               @blur="handleBlur(item, $event)"
+               @keyup.enter="handleBlur(item, $event)"
+               ref="inputTitle"
+        >
+      </label>
+
+      <button class="btn btn-danger" @click="handleDelete(item.id)">删除</button>
+      <button class="btn btn-edit" @click="handleEdit(item)">编辑</button>
+
+    </li>
+  </transition>
 </template>
 
 <script>
+import 'animate.css'
+
+
 export default {
   name: "TodoItem",
   //声明接收对象
@@ -42,7 +52,7 @@ export default {
       } else {
         this.$set(item, 'isEdit', true);
       }
-      this.$nextTick(function (){
+      this.$nextTick(function () {
         this.$refs.inputTitle.focus();
       });
     },
@@ -50,7 +60,7 @@ export default {
     handleBlur(item, e) {
       item.isEdit = false;
       const title = e.target.value.trim();
-      if(!title) return alert("输入不能为空!");
+      if (!title) return alert("输入不能为空!");
       this.$bus.$emit('updateItem', item.id, title);
     }
   }
