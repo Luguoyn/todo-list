@@ -3,8 +3,6 @@
     <todo-item v-for="item in todos"
                :key="item.id"
                :item="item"
-               :check-item="checkItem"
-               :delete-item="deleteItem"
     />
   </ul>
 </template>
@@ -17,7 +15,7 @@ export default {
   components: {
     TodoItem,
   },
-  props: ['todos', 'checkItem', 'deleteItem'],
+  props: ['todos'],
 }
 </script>
 

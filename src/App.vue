@@ -4,11 +4,7 @@
       <div class="todo-wrap">
         <todo-header
             @addItem="addItem"/>
-        <todo-list
-            :todos="todos"
-            :check-item="checkItem"
-            :delete-item="deleteItem"
-        />
+        <todo-list :todos="todos" />
         <todo-footer
             :todos="todos"
             @checkAllItems="checkAllItems"
@@ -64,6 +60,14 @@ export default {
         localStorage.setItem("todos", JSON.stringify(value));
       }
     }
+  },
+  mounted(){
+    this.$bus.$on('checkItem', this.checkItem);
+    this.$bus.$on('deleteItem', this.deleteItem);
+  },
+  beforeDestroy() {
+    this.$bus.$off('checkItem');
+    this.$bus.$off('deleteItem');
   }
 }
 </script>
