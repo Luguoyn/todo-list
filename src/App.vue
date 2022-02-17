@@ -2,7 +2,8 @@
   <div id="todo-app">
     <div class="todo-container">
       <div class="todo-wrap">
-        <todo-header :add-item="addItem"/>
+        <todo-header
+            @addItem="addItem"/>
         <todo-list
             :todos="todos"
             :check-item="checkItem"
@@ -10,8 +11,8 @@
         />
         <todo-footer
             :todos="todos"
-            :check-all-items="checkAllItems"
-            :delete-all-done-items="deleteAllDoneItems"
+            @checkAllItems="checkAllItems"
+            @deleteAllDoneItems="deleteAllDoneItems"
         />
       </div>
     </div>

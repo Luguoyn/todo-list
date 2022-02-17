@@ -14,11 +14,12 @@
 <script>
 export default {
   name: "TodoFooter",
-  props: ['todos', 'checkAllItems', 'deleteAllDoneItems'],
+  props: ['todos'],
   methods: {
     deleteAllDone() {
       if (confirm('是否删除所有已完成任务?')) {
-        this.deleteAllDoneItems();
+        // this.deleteAllDoneItems();
+        this.$emit('deleteAllDoneItems');
       }
     }
   },
@@ -36,7 +37,8 @@ export default {
         return this.doneTotal === this.total && this.total > 0;
       },
       set(value) {
-        this.checkAllItems(value);
+        // this.checkAllItems(value);
+        this.$emit('checkAllItems', value);
       }
     },
   }

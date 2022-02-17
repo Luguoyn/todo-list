@@ -25,12 +25,13 @@ export default {
       //创建对象
       const item = this.createTodoItem(this.title);
       //添加对象
-      this.addItem(item);
+      // this.addItem(item);
+      this.$emit('addItem', item);
       //清空数据
       this.title = '';
     }
   },
-  props: ['addItem'],
+  // props: ['addItem'],
 }
 </script>
 
